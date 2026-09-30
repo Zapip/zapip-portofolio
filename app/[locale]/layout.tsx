@@ -3,6 +3,8 @@ import { DM_Sans, Space_Grotesk } from "next/font/google";
 import "../globals.css";
 import { routing } from '@/i18n/routing';
 import { NextIntlClientProvider } from "next-intl";
+import { ThemeProvider } from "@/common/components/shared/theme-provider";
+import NavigationSystem from "@/common/components/shared/navigation-system";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -19,7 +21,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Zafif Hilmi",
+  title: {
+    template: "%s | Zafif Hilmi",
+    default: "Zafif Hilmi Portofolio",
+  },
   description: "Web Portofolio Zafif Hilmi",
 };
 
@@ -34,11 +39,15 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
     <html
       lang={locale}
       className={`${dmSans.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className={"min-h-full flex flex-col"}>
-        <NextIntlClientProvider>
-          {children}
-        </NextIntlClientProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <NextIntlClientProvider>
+            <NavigationSystem />
+            {children}
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,94 +1,101 @@
 "use client";
 
-import React, { useTransition } from "react";
+import { useTransition } from "react";
 import { motion } from "motion/react";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 
+const locales = [
+  { value: "en", flag: "🇺🇸", label: "English" },
+  { value: "id", flag: "🇮🇩", label: "Bahasa Indonesia" },
+] as const;
+
 const IntlToggle = () => {
-    const currentLocale = useLocale();
-    const router = useRouter();
-    const pathname = usePathname();
-    const [isPending, startTransition] = useTransition();
+  const currentLocale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
 
-    const locales = [
-        { value: "en", flag: "🇺🇸" },
-        { value: "id", flag: "🇮🇩" },
-    ];
+  const currentIndex = locales.findIndex((l) => l.value === currentLocale);
+  const buttonWidth = 40;
+  const gap = 4;
+  const slidePosition = currentIndex * buttonWidth;
 
-    const currentIndex = locales.findIndex(
-        (locale) => locale.value === currentLocale,
-    );
+  const handleLocaleChange = (nextLocale: string) => {
+    if (nextLocale === currentLocale || isPending) return;
+    startTransition(() => {
+      router.replace(pathname, { locale: nextLocale as "en" | "id" });
+    });
+  };
 
-    const buttonWidth = 40;
-    const totalWidth = buttonWidth * locales.length;
-    const slidePosition = currentIndex * buttonWidth;
+  const surface =
+    "rounded-full border border-border bg-secondary p-1 transition duration-200";
 
-    const handleLocaleChange = (nextLocale: string) => {
-        if (nextLocale === currentLocale || isPending) return;
+  return (
+    <div className="flex items-center justify-center">
+      {/* Desktop: segmented switch with sliding indicator */}
+      <div
+        className={`relative hidden items-center gap-1 ${surface} lg:flex ${
+          isPending ? "pointer-events-none opacity-70" : ""
+        }`}
+        style={{ width: `${buttonWidth * locales.length + gap * (locales.length - 1) + 10}px` }}
+        role="group"
+        aria-label="Language switcher"
+      >
+        <motion.div
+          className="absolute bottom-1 top-1 w-10 rounded-full bg-primary"
+          animate={{ x: slidePosition + currentIndex * gap }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        />
 
-        startTransition(() => {
-            router.replace(pathname, { locale: nextLocale });
-        });
-    };
-
-    return (
-        <div className="flex items-center justify-center">
-            <div
-                className={`relative hidden items-center gap-1 rounded-full border-[1.5px] border-neutral-300 bg-neutral-100 p-1 dark:border-neutral-700 dark:bg-neutral-800 lg:flex ${isPending ? "pointer-events-none opacity-70" : ""
-                    }`}
-                style={{ width: `${totalWidth + (locales.length - 1) * 4 + 10}px` }}
+        {locales.map((locale, index) => (
+          <motion.button
+            key={locale.value}
+            type="button"
+            className="relative z-10 flex h-8 w-10 items-center justify-center transition duration-200"
+            onClick={() => handleLocaleChange(locale.value)}
+            whileHover={{ scale: isPending ? 1 : 1.15 }}
+            whileTap={{ scale: isPending ? 1 : 0.9 }}
+            disabled={isPending}
+            aria-label={`Switch to ${locale.label}`}
+            aria-pressed={currentIndex === index}
+          >
+            <motion.div
+              className="flex flex-col items-center justify-center text-xs font-medium"
+              animate={{
+                color:
+                  currentIndex === index
+                    ? "var(--primary-foreground)"
+                    : "var(--muted-foreground)",
+              }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-                <motion.div
-                    className="absolute bottom-1 top-1 w-10 rounded-full bg-primary"
-                    animate={{
-                        x: slidePosition + currentIndex * 4,
-                    }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 30,
-                    }}
-                />
+              {locale.flag}
+            </motion.div>
+          </motion.button>
+        ))}
+      </div>
 
-                {locales.map((locale, index) => (
-                    <motion.button
-                        key={locale.value}
-                        className="relative z-10 flex h-8 w-10 items-center justify-center transition duration-200"
-                        onClick={() => handleLocaleChange(locale.value)}
-                        whileHover={{ scale: isPending ? 1 : 1.15 }}
-                        whileTap={{ scale: isPending ? 1 : 0.9 }}
-                        disabled={isPending}
-                    >
-                        <motion.div
-                            className="flex flex-col items-center justify-center text-xs font-medium"
-                            animate={{
-                                color: currentIndex === index ? "#121212" : "#737373",
-                            }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                        >
-                            {locale.flag}
-                        </motion.div>
-                    </motion.button>
-                ))}
-            </div>
-
-            <button
-                className="flex items-center gap-2 rounded-full border-[1.5px] border-neutral-300 bg-neutral-100 p-1 transition duration-200 hover:scale-110 dark:border-neutral-700 dark:bg-neutral-800 lg:hidden"
-                onClick={() =>
-                    handleLocaleChange(locales[(currentIndex + 1) % locales.length].value)
-                }
-                disabled={isPending}
-            >
-                <motion.div
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white"
-                >
-                    {locales[(currentIndex + 1) % locales.length].flag}
-                </motion.div>
-            </button>
-        </div>
-    );
+      {/* Mobile: single toggle cycling to next locale */}
+      <button
+        type="button"
+        className={`${surface} flex items-center gap-2 hover:scale-110 lg:hidden`}
+        onClick={() =>
+          handleLocaleChange(locales[(currentIndex + 1) % locales.length].value)
+        }
+        disabled={isPending}
+        aria-label={`Switch language to ${locales[(currentIndex + 1) % locales.length].label}`}
+        aria-pressed={false}
+      >
+        <motion.div
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground"
+        >
+          {locales[(currentIndex + 1) % locales.length].flag}
+        </motion.div>
+      </button>
+    </div>
+  );
 };
 
 export default IntlToggle;

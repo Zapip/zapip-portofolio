@@ -1,1 +1,10 @@
-{}
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "achievements": "Achievements",
+    "certifications": "Certifications & Trainings",
+    "projects": "Projects",
+    "contact": "Contact"
+  }
+}
