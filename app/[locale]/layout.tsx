@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, Space_Grotesk } from "next/font/google";
 import "../globals.css";
 import { routing } from '@/i18n/routing';
+import { NextIntlClientProvider } from "next-intl";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -34,7 +35,11 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
       lang={locale}
       className={`${dmSans.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className={"min-h-full flex flex-col"}>{children}</body>
+      <body className={"min-h-full flex flex-col"}>
+        <NextIntlClientProvider>
+          {children}
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }
