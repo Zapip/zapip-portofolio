@@ -9,13 +9,7 @@
  * and to keep routing + labels co-located.
  */
 
-export type Locale = "en" | "id";
-
-export interface NavItem {
-  /** Route segment; "" means home ("/"). */
-  key: string;
-  label: { en: string; id: string };
-}
+import type { Locale, NavItem } from "@/common/types";
 
 export const navItems: readonly NavItem[] = [
   { key: "", label: { en: "Home", id: "Beranda" } },

@@ -23,5 +23,10 @@
     "subtitle": "An error occurred while rendering this page. You can try again or return to the home page.",
     "tryAgain": "Try again",
     "returnHome": "Return home"
+  },
+  "home": {
+    "eyebrow": "Portfolio",
+    "viewProjects": "View projects",
+    "contactMe": "Contact me"
   }
 }

@@ -6,7 +6,8 @@ import { useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import ThemeToggle from "./toogle-theme";
 import IntlToggle from "../layouts/IntlToggle";
-import { getNavLabel, navItems, type Locale } from "@/common/constants/navigation";
+import { getNavLabel, navItems } from "@/common/constants/navigation";
+import type { Locale } from "@/common/types";
 import { useMobileMenu } from "@/common/hooks/use-mobile-menu";
 
 export default function NavigationSystem() {

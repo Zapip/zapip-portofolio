@@ -23,5 +23,10 @@
     "subtitle": "Terjadi kesalahan saat merender halaman ini. Anda dapat mencoba lagi atau kembali ke beranda.",
     "tryAgain": "Coba lagi",
     "returnHome": "Kembali ke beranda"
+  },
+  "home": {
+    "eyebrow": "Portofolio",
+    "viewProjects": "Lihat proyek",
+    "contactMe": "Hubungi saya"
   }
 }

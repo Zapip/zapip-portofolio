@@ -3,7 +3,7 @@ import HomePage from "@/common/modules/home";
 
 export const metadata = {
     title: "Zafif Hilmi",
-    description: "A simple Next.js 13 project with TypeScript, TailwindCSS and i18n support.",
+    description: "Portfolio of M. Zafif Hilmi Al-Hadi — a full-stack developer building digital solutions that make an impact.",
 };
 
 export default function Page() {
