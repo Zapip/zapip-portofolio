@@ -3,8 +3,25 @@
     "home": "Beranda",
     "about": "Tentang",
     "achievements": "Pencapaian",
-    "certifications": "Sertifikasi dan Pelatihan",
+    "certifications": "Sertifikasi",
     "projects": "Proyek",
     "contact": "Kontak"
+  },
+  "loading": {
+    "title": "Memuat",
+    "subtitle": "Mohon tunggu sebentar"
+  },
+  "notFound": {
+    "eyebrow": "Error 404",
+    "title": "Halaman tidak ditemukan",
+    "subtitle": "Halaman yang Anda cari tidak ada atau telah dipindahkan.",
+    "returnHome": "Kembali ke beranda"
+  },
+  "error": {
+    "eyebrow": "Terjadi kesalahan",
+    "title": "Kesalahan tak terduga",
+    "subtitle": "Terjadi kesalahan saat merender halaman ini. Anda dapat mencoba lagi atau kembali ke beranda.",
+    "tryAgain": "Coba lagi",
+    "returnHome": "Kembali ke beranda"
   }
 }

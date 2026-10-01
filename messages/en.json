@@ -3,8 +3,25 @@
     "home": "Home",
     "about": "About",
     "achievements": "Achievements",
-    "certifications": "Certifications & Trainings",
+    "certifications": "Certifications",
     "projects": "Projects",
     "contact": "Contact"
+  },
+  "loading": {
+    "title": "Loading",
+    "subtitle": "Please wait a moment"
+  },
+  "notFound": {
+    "eyebrow": "Error 404",
+    "title": "Page not found",
+    "subtitle": "The page you are looking for doesn't exist or has been moved.",
+    "returnHome": "Return home"
+  },
+  "error": {
+    "eyebrow": "Something went wrong",
+    "title": "Unexpected error",
+    "subtitle": "An error occurred while rendering this page. You can try again or return to the home page.",
+    "tryAgain": "Try again",
+    "returnHome": "Return home"
   }
 }
