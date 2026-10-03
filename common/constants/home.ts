@@ -1,8 +1,9 @@
 
-import type { HomeBanner as Home } from "@/common/types";
+import type { Banner as Home } from "@/common/types";
 
 export const home: Home = {
   name: "M. Zafif Hilmi Al-Hadi",
+  nickname: "Zapip",
   location: {
     en: "Indonesia",
     id: "Indonesia",

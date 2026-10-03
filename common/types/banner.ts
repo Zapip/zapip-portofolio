@@ -1,6 +1,8 @@
 export interface Banner {
     /** Full name shown in hero & <title>. */
     name?: string;
+    /** Nickname shown in hero & <title>. */
+    nickname?: string;
     /** Professional role / title. */
     role?: { en: string; id: string };
     /** Location string. */

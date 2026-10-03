@@ -5,6 +5,7 @@ import { routing } from '@/i18n/routing';
 import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider } from "@/common/components/shared/theme-provider";
 import NavigationSystem from "@/common/components/shared/navigation-system";
+import Footer from "@/common/components/shared/footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -45,7 +46,8 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <NextIntlClientProvider>
             <NavigationSystem />
-            {children}
+            <main className="flex-1">{children}</main>
+            <Footer />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

@@ -2,7 +2,7 @@
 import { useLocale } from "next-intl";
 import { certificationsAndTraining } from "@/common/constants/banner";
 import type { Locale } from "@/common/types";
-import GreetingsBanner from "../shared/geetings";
+import GreetingsBanner from "../shared/greetings";
 
 export default function WelcomeBanner() {
     const locale = useLocale() as Locale;
@@ -10,6 +10,6 @@ export default function WelcomeBanner() {
     const information = certificationsAndTraining.information?.[locale];
     const description = certificationsAndTraining.description?.[locale];
     return (
-        <GreetingsBanner  tagline={tagline} information={information} description={description} spanDisplay={false} separator={false} />
+        <GreetingsBanner tagline={tagline} information={information} description={description} spanDisplay={false} separator={false} />
     );
 }

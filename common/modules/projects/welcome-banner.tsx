@@ -3,7 +3,7 @@
 import { useLocale } from "next-intl";
 import { projects } from "@/common/constants/banner";
 import type { Locale } from "@/common/types";
-import GreetingsBanner from "../shared/geetings";
+import GreetingsBanner from "../shared/greetings";
 
 export default function WelcomeBanner() {
     const locale = useLocale() as Locale;

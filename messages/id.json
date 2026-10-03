@@ -28,5 +28,22 @@
     "eyebrow": "Portofolio",
     "viewProjects": "Lihat proyek",
     "contactMe": "Hubungi saya"
+  },
+  "contact": {
+    "channelsTitle": "Terhubung langsung",
+    "channelsSubtitle": "Temukan saya di platform berikut",
+    "formTitle": "Kirim pesan",
+    "formSubtitle": "Isi formulir di bawah untuk menghubungi saya",
+    "form": {
+      "name": "Nama",
+      "email": "Email",
+      "subject": "Subjek",
+      "message": "Pesan",
+      "submit": "Kirim pesan"
+    }
+  },
+  "footer": {
+    "connect": "Mari Terhubung",
+    "rights": "Hak cipta dilindungi."
   }
 }

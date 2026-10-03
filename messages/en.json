@@ -28,5 +28,22 @@
     "eyebrow": "Portfolio",
     "viewProjects": "View projects",
     "contactMe": "Contact me"
+  },
+  "contact": {
+    "channelsTitle": "Connect directly",
+    "channelsSubtitle": "Find me on these platforms",
+    "formTitle": "Send a message",
+    "formSubtitle": "Fill out the form below to get in touch",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send message"
+    }
+  },
+  "footer": {
+    "connect": "Let's Connect",
+    "rights": "All rights reserved."
   }
 }
