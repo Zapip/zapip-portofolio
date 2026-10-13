@@ -23,7 +23,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Zafif Hilmi",
+    template: "%s ⟢ Zafif Hilmi",
     default: "Zafif Hilmi Portofolio",
   },
   description: "Web Portofolio Zafif Hilmi",

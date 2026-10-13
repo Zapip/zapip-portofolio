@@ -1,8 +1,8 @@
 import { AboutPage } from "@/common/modules/about";
 
 export const metadata = {
-    title: "About Page",
-    description: "A simple Next.js 13 project with TypeScript, TailwindCSS and i18n support.",
+    title: "About",
+    description: "Learn more about M. Zafif Hilmi Al-Hadi — profile, work experience, and education background.",
 };
 
 export default function Page() {

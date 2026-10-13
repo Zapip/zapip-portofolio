@@ -45,5 +45,20 @@
   "footer": {
     "connect": "Mari Terhubung",
     "rights": "Hak cipta dilindungi."
+  },
+  "about": {
+    "profileTitle": "Profil",
+    "profileSubtitle": "Siapa saya dan apa yang mendorong pekerjaan saya",
+    "areasOfInterest": "Bidang minat",
+    "experienceTitle": "Pengalaman Kerja",
+    "experienceSubtitle": "Di mana saya bekerja dan apa yang saya bangun",
+    "educationTitle": "Pendidikan",
+    "educationSubtitle": "Latar belakang akademik",
+    "responsibilities": "Tanggung jawab",
+    "whatILearned": "Yang saya pelajari",
+    "impact": "Dampak",
+    "present": "Sekarang",
+    "gpa": "IPK",
+    "activities": "Aktivitas"
   }
 }

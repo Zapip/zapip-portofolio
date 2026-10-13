@@ -45,5 +45,20 @@
   "footer": {
     "connect": "Let's Connect",
     "rights": "All rights reserved."
+  },
+  "about": {
+    "profileTitle": "Profile",
+    "profileSubtitle": "Who I am and what drives my work",
+    "areasOfInterest": "Areas of interest",
+    "experienceTitle": "Work Experience",
+    "experienceSubtitle": "Where I've worked and what I've built",
+    "educationTitle": "Education",
+    "educationSubtitle": "Academic background",
+    "responsibilities": "Responsibilities",
+    "whatILearned": "What I learned",
+    "impact": "Impact",
+    "present": "Present",
+    "gpa": "GPA",
+    "activities": "Activities"
   }
 }
