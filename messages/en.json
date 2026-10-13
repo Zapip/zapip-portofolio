@@ -60,5 +60,30 @@
     "present": "Present",
     "gpa": "GPA",
     "activities": "Activities"
+  },
+  "achievements": {
+    "searchPlaceholder": "Search by title, organization, or description...",
+    "showingResults": "Showing {count} achievements",
+    "showingResultsSingle": "Showing 1 achievement",
+    "emptyTitle": "No achievements found",
+    "emptyDescription": "No achievements match your search keywords or active category filter.",
+    "clearFilters": "Reset search & filter",
+    "viewDetail": "View detail",
+    "backToList": "Back to achievements",
+    "evidencePreview": "Credential Evidence Preview",
+    "contextTitle": "01 / Context",
+    "contextSubtitle": "Why it came about",
+    "approachTitle": "02 / The Approach",
+    "approachSubtitle": "What I did",
+    "outcomeTitle": "03 / Outcome",
+    "outcomeSubtitle": "What it changed",
+    "credentialBoxTitle": "Credential Details",
+    "organizationLabel": "Issuing Organization",
+    "issuedDateLabel": "Issued Date",
+    "categoryLabel": "Category",
+    "credentialIdLabel": "Credential ID",
+    "verifyCredential": "Verify Credential",
+    "copyLink": "Share link",
+    "copied": "Copied!"
   }
 }

@@ -123,7 +123,7 @@ Setiap experience berisi:
 
 ### 3.3 Achievements
 
-Menampilkan list achievement.
+Menampilkan list achievement (desc).
 
 #### Search
 
@@ -135,8 +135,7 @@ Search berdasarkan:
 
 #### Filter
 
-- Type - course, award, etc
-- Category - FE, BE, AI, etc
+- Type - BPC (business plan competititon), award, Design, Essay, LKTI, HAKI, Publication, other.
 
 #### Achievement Card
 
@@ -146,12 +145,13 @@ Search berdasarkan:
 - Category
 - Short description
 - View detail
+- Thumbnail (Ambil Image)
 
 #### Achievement Detail
 
 - Title
 - Organization
-- Description
+- Description (markdown based)
 - Credential ID
 - Issued date
 - Credential/evidence image jika tersedia

@@ -1,8 +1,8 @@
 import AchievementPage from "@/common/modules/achievements";
 
 export const metadata = {
-    title: "Achievements Page",
-    description: "A simple Next.js 13 project with TypeScript, TailwindCSS and i18n support.",
+    title: "Achievements",
+    description: "Explore awards, competitions, scientific papers, and recognitions earned by M. Zafif Hilmi Al-Hadi.",
 };
 
 export default function Page() {

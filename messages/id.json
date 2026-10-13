@@ -60,5 +60,30 @@
     "present": "Sekarang",
     "gpa": "IPK",
     "activities": "Aktivitas"
+  },
+  "achievements": {
+    "searchPlaceholder": "Cari berdasarkan judul, penyelenggara, atau deskripsi...",
+    "showingResults": "Menampilkan {count} pencapaian",
+    "showingResultsSingle": "Menampilkan 1 pencapaian",
+    "emptyTitle": "Tidak ada pencapaian ditemukan",
+    "emptyDescription": "Tidak ada pencapaian yang cocok dengan kata kunci pencarian atau filter yang dipilih.",
+    "clearFilters": "Reset pencarian & filter",
+    "viewDetail": "Lihat detail",
+    "backToList": "Kembali ke pencapaian",
+    "evidencePreview": "Pratinjau Bukti Kredensial",
+    "contextTitle": "01 / Konteks",
+    "contextSubtitle": "Latar belakang masalah",
+    "approachTitle": "02 / Pendekatan",
+    "approachSubtitle": "Yang saya lakukan",
+    "outcomeTitle": "03 / Hasil & Dampak",
+    "outcomeSubtitle": "Perubahan yang dicapai",
+    "credentialBoxTitle": "Detail Kredensial",
+    "organizationLabel": "Organisasi Penerbit",
+    "issuedDateLabel": "Tanggal Terbit",
+    "categoryLabel": "Kategori",
+    "credentialIdLabel": "ID Kredensial",
+    "verifyCredential": "Verifikasi Kredensial",
+    "copyLink": "Bagikan tautan",
+    "copied": "Tersalin!"
   }
 }

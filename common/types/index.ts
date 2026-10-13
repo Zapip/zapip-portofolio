@@ -6,3 +6,4 @@ export * from "./navigation";
 export * from "./banner";
 export * from "./contact";
 export * from "./about";
+export * from "./achievements";
