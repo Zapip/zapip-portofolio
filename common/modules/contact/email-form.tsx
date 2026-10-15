@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { PaperPlaneTiltIcon } from "@phosphor-icons/react";
+import Button from "@/common/components/elements/Button";
 
 /**
  * Contact form with a section heading — UI only (no submit handler yet).
@@ -104,13 +105,15 @@ export default function EmailForm() {
         </div>
 
         {/* Submit */}
-        <button
+        <Button
           type="submit"
-          className="mt-1 inline-flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition duration-200 hover:scale-[1.02] active:scale-[0.98]"
+          variant="primary"
+          size="lg"
+          icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
+          className="mt-1 w-full sm:w-auto"
         >
-          <PaperPlaneTiltIcon size={16} weight="bold" />
           {formT("submit")}
-        </button>
+        </Button>
       </form>
     </section>
   );

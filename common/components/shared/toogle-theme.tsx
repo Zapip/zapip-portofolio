@@ -3,7 +3,11 @@
 import { MoonIcon as DarkModeIcon, SunIcon as LightModeIcon } from "@phosphor-icons/react";
 import { motion } from "motion/react";
 import { useTheme } from "next-themes";
+import Button from "@/common/components/elements/Button";
 import { useIsClient } from "@/common/hooks/use-is-client";
+
+/** Motion-enabled variant of the shared Button (keeps whileHover/whileTap). */
+const MotionButton = motion.create(Button);
 
 const ThemeToggle = () => {
   const { resolvedTheme, setTheme } = useTheme();
@@ -39,9 +43,10 @@ const ThemeToggle = () => {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         />
 
-        <motion.button
-          type="button"
-          className="relative z-10 flex h-8 w-8 items-center justify-center transition duration-200"
+        <MotionButton
+          variant="ghost"
+          size="icon"
+          className="relative z-10 size-8 rounded-full hover:bg-transparent active:scale-100"
           onClick={() => setTheme("light")}
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
@@ -54,11 +59,12 @@ const ThemeToggle = () => {
           >
             <LightModeIcon size={17} weight="duotone" />
           </motion.div>
-        </motion.button>
+        </MotionButton>
 
-        <motion.button
-          type="button"
-          className="relative z-10 flex h-8 w-8 items-center justify-center transition duration-200"
+        <MotionButton
+          variant="ghost"
+          size="icon"
+          className="relative z-10 size-8 rounded-full hover:bg-transparent active:scale-100"
           onClick={() => setTheme("dark")}
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
@@ -71,13 +77,14 @@ const ThemeToggle = () => {
           >
             <DarkModeIcon size={17} weight="duotone" />
           </motion.div>
-        </motion.button>
+        </MotionButton>
       </div>
 
       {/* Mobile: single toggle button */}
-      <button
-        type="button"
-        className={`${surface} flex items-center gap-2 hover:scale-110 lg:hidden`}
+      <Button
+        variant="ghost"
+        size="icon"
+        className={`${surface} h-10 w-10 rounded-full hover:bg-secondary active:scale-100 lg:hidden`}
         onClick={() => setTheme(isLightMode ? "dark" : "light")}
         aria-label={`Switch to ${isLightMode ? "dark" : "light"} theme`}
         aria-pressed={!isLightMode}
@@ -92,7 +99,7 @@ const ThemeToggle = () => {
             <LightModeIcon size={17} weight="duotone" />
           )}
         </motion.div>
-      </button>
+      </Button>
     </div>
   );
 };

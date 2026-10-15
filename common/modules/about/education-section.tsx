@@ -28,8 +28,8 @@ export default function EducationSection() {
                   alt={`${item.institution} logo`}
                   width={24}
                   height={24}
-                  unoptimized
                   className="object-contain"
+                  // loading="eager"
                 />
               </span>
 

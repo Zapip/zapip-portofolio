@@ -16,18 +16,9 @@ import type {
   AchievementCategory,
   Locale,
 } from "@/common/types";
+import Button from "@/common/components/elements/Button";
 import AchievementCard from "./achievement-card";
 
-/**
- * Achievements list component with real-time search, category filters,
- * count indicator, and empty state.
- *
- * PRD §3.3 & §4.5:
- *  - Search by Title, Organization, Description (case-insensitive)
- *  - Filter by Category pills (All, BPC, Award, Design, Essay, LKTI, HAKI, Publication, Other)
- *  - Result counter
- *  - Empty state with reset CTA
- */
 export default function AchievementList() {
   const locale = useLocale() as Locale;
   const t = useTranslations("achievements");
@@ -80,17 +71,18 @@ export default function AchievementList() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={t("searchPlaceholder")}
-            className="w-full rounded-lg border border-input bg-background py-2.5 pr-10 pl-10 text-sm text-foreground placeholder:text-muted-foreground transition duration-200 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background"
+            className=" font-sans w-full rounded-lg border border-input bg-background py-2.5 pr-10 pl-10 text-sm sm:text-base text-foreground placeholder:text-muted-foreground transition duration-200 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background"
           />
           {searchQuery && (
-            <button
-              type="button"
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setSearchQuery("")}
-              className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-muted-foreground transition duration-200 hover:text-foreground"
+              className="absolute inset-y-0 right-0 h-full w-10 rounded-none text-muted-foreground hover:bg-transparent hover:text-foreground"
               aria-label="Clear search input"
             >
               <XIcon size={16} weight="bold" />
-            </button>
+            </Button>
           )}
         </div>
 
@@ -103,19 +95,16 @@ export default function AchievementList() {
           {achievementCategories.map((category) => {
             const isSelected = selectedCategory === category.key;
             return (
-              <button
+              <Button
                 key={category.key}
-                type="button"
+                variant={isSelected ? "primary" : "secondary"}
+                size="sm"
                 onClick={() => setSelectedCategory(category.key)}
                 aria-pressed={isSelected}
-                className={`inline-flex items-center rounded-md px-3 py-1.5 text-xs font-semibold transition duration-200 ${
-                  isSelected
-                    ? "bg-primary text-primary-foreground shadow-xs"
-                    : "border border-border bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
-                }`}
+                className="h-auto rounded-md px-3 py-1.5 font-sans font-semibold"
               >
                 {category.label[locale]}
-              </button>
+              </Button>
             );
           })}
         </div>
@@ -123,21 +112,22 @@ export default function AchievementList() {
 
       {/* Results Count & Clear Shortcut */}
       <div className="flex items-center justify-between border-b border-border pb-3">
-        <p className="text-xs font-medium text-muted-foreground sm:text-sm">
+        <p className="text-xs  font-medium text-muted-foreground sm:text-sm">
           {filteredAchievements.length === 1
             ? t("showingResultsSingle")
             : t("showingResults", { count: filteredAchievements.length })}
         </p>
 
         {isFiltered && (
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={handleClearFilters}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground transition duration-200 hover:text-foreground"
+            icon={<ArrowCounterClockwiseIcon size={14} weight="bold" />}
+            className="h-auto gap-1.5 px-0 text-xs font-semibold text-muted-foreground hover:bg-transparent hover:text-foreground"
           >
-            <ArrowCounterClockwiseIcon size={14} weight="bold" />
-            <span>{t("clearFilters")}</span>
-          </button>
+            {t("clearFilters")}
+          </Button>
         )}
       </div>
 
@@ -163,14 +153,14 @@ export default function AchievementList() {
             </p>
           </div>
 
-          <button
-            type="button"
+          <Button
+            variant="secondary"
             onClick={handleClearFilters}
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-xs font-semibold text-foreground transition duration-200 hover:scale-105 sm:text-sm"
+            icon={<ArrowCounterClockwiseIcon size={15} weight="bold" />}
+            className="text-xs font-semibold sm:text-sm"
           >
-            <ArrowCounterClockwiseIcon size={15} weight="bold" />
-            <span>{t("clearFilters")}</span>
-          </button>
+            {t("clearFilters")}
+          </Button>
         </div>
       )}
     </section>

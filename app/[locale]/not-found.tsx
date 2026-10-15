@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { ArrowLeftIcon } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
 import { motion } from "motion/react";
+import { buttonVariants } from "@/common/components/elements/Button";
 
 /**
  * PRD §8: custom 404 page providing navigation back to home.
@@ -35,9 +36,9 @@ export default function NotFound() {
 
         <Link
           href="/"
-          className="mt-2 inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-medium text-foreground transition duration-200 hover:scale-105"
+          className={buttonVariants({ variant: "secondary", className: "mt-2" })}
         >
-          <ArrowLeftIcon size={16} weight="bold" />
+          <ArrowLeftIcon size={16} weight="bold" aria-hidden />
           {t("returnHome")}
         </Link>
       </motion.div>

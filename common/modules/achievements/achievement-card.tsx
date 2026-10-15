@@ -35,7 +35,7 @@ export default function AchievementCard({ achievement }: AchievementCardProps) {
           src={achievement.thumbnail}
           alt={`${title} thumbnail`}
           fill
-          unoptimized
+          loading="eager"
           className="object-contain p-8 transition-transform duration-300 group-hover:scale-105"
         />
 
@@ -75,7 +75,7 @@ export default function AchievementCard({ achievement }: AchievementCardProps) {
           </h3>
 
           {/* Short Description */}
-          <p className="text-xs leading-relaxed text-muted-foreground line-clamp-3 md:text-sm">
+          <p className="font-sans text-xs leading-relaxed text-muted-foreground line-clamp-3 md:text-sm">
             {shortDescription}
           </p>
         </div>

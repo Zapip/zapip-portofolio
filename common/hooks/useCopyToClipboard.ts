@@ -1,32 +1,5 @@
 import { useState } from "react";
 
-/**
- * Custom hook for copying text to clipboard with fallback support.
- *
- * Provides robust clipboard copy functionality with:
- * - Modern Clipboard API (navigator.clipboard.writeText)
- * - Legacy fallback (document.execCommand for older browsers)
- * - Automatic copied state management with timeout
- * - Error handling for focus/permission issues
- *
- * @param timeout - Duration in milliseconds to show "copied" state (default: 2000ms)
- * @returns Object with `copied` state and `copy` function
- *
- * @example
- * ```tsx
- * const { copied, copy } = useCopyToClipboard();
- *
- * const handleCopy = () => {
- *   copy("text to copy");
- * };
- *
- * return (
- *   <button onClick={handleCopy}>
- *     {copied ? "Copied!" : "Copy"}
- *   </button>
- * );
- * ```
- */
 export function useCopyToClipboard(timeout = 2000) {
   const [copied, setCopied] = useState(false);
 

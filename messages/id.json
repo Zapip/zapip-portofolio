@@ -84,6 +84,7 @@
     "credentialIdLabel": "ID Kredensial",
     "verifyCredential": "Verifikasi Kredensial",
     "copyLink": "Bagikan tautan",
-    "copied": "Tersalin!"
+    "copied": "Tersalin!",
+    "shared": "Berhasil dibagikan!"
   }
 }

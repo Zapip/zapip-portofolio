@@ -41,6 +41,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
       lang={locale}
       className={`${dmSans.variable} ${spaceGrotesk.variable} h-full antialiased`}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
     >
       <body className={"min-h-full flex flex-col"}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

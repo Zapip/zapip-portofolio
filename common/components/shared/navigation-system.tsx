@@ -6,9 +6,11 @@ import { useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import ThemeToggle from "./toogle-theme";
 import IntlToggle from "../layouts/IntlToggle";
+import Button from "@/common/components/elements/Button";
 import { getNavLabel, navItems } from "@/common/constants/navigation";
 import type { Locale } from "@/common/types";
 import { useMobileMenu } from "@/common/hooks/use-mobile-menu";
+import Image from "next/image";
 
 export default function NavigationSystem() {
   const pathname = usePathname();
@@ -38,7 +40,7 @@ export default function NavigationSystem() {
             whileHover={{ rotate: -6, scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            Z.
+            <Image src="/web-app-manifest-512x512.png" alt="Logo" width={32} height={32} />
           </motion.span>
           <span className="font-display text-[0.95rem] font-bold tracking-tight text-foreground">
             Zafif Hilmi
@@ -81,10 +83,11 @@ export default function NavigationSystem() {
           </section>
 
           {/* Hamburger (mobile only) */}
-          <button
-            type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-secondary text-foreground transition duration-200 hover:scale-105 lg:hidden"
+          <Button
+            variant="secondary"
+            size="icon"
             onClick={toggle}
+            className="rounded-full lg:hidden"
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
             aria-controls="mobile-nav-panel"
@@ -112,7 +115,7 @@ export default function NavigationSystem() {
                 </motion.span>
               )}
             </AnimatePresence>
-          </button>
+          </Button>
         </section>
       </nav>
 

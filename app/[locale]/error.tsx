@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 import { ArrowLeftIcon, ArrowsClockwiseIcon } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
 import { motion } from "motion/react";
+import Button from "@/common/components/elements/Button";
+import { buttonVariants } from "@/common/components/elements/Button";
 
 /**
  * Next.js error boundary for the `[locale]` segment.
@@ -41,20 +43,19 @@ export default function Error({
         </p>
 
         <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
-          <button
-            type="button"
+          <Button
+            variant="secondary"
             onClick={reset}
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-medium text-foreground transition duration-200 hover:scale-105"
+            icon={<ArrowsClockwiseIcon size={16} weight="bold" />}
           >
-            <ArrowsClockwiseIcon size={16} weight="bold" />
             {t("tryAgain")}
-          </button>
+          </Button>
 
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-medium text-foreground transition duration-200 hover:scale-105"
+            className={buttonVariants({ variant: "secondary" })}
           >
-            <ArrowLeftIcon size={16} weight="bold" />
+            <ArrowLeftIcon size={16} weight="bold" aria-hidden />
             {t("returnHome")}
           </Link>
         </div>

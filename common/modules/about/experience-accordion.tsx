@@ -37,8 +37,8 @@ export default function ExperienceAccordion({
             alt={`${experience.company} logo`}
             width={24}
             height={24}
-            unoptimized
             className="object-contain"
+            // loading="eager"
           />
         </span>
 

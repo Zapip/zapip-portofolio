@@ -4,6 +4,10 @@ import { useTransition } from "react";
 import { motion } from "motion/react";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
+import Button from "@/common/components/elements/Button";
+
+/** Motion-enabled variant of the shared Button (keeps whileHover/whileTap). */
+const MotionButton = motion.create(Button);
 
 const locales = [
   { value: "en", flag: "🇺🇸", label: "English" },
@@ -49,10 +53,11 @@ const IntlToggle = () => {
         />
 
         {locales.map((locale, index) => (
-          <motion.button
+          <MotionButton
             key={locale.value}
-            type="button"
-            className="relative z-10 flex h-8 w-10 items-center justify-center transition duration-200"
+            variant="ghost"
+            size="icon"
+            className="relative z-10 flex h-8 w-10 items-center justify-center rounded-full hover:bg-transparent active:scale-100"
             onClick={() => handleLocaleChange(locale.value)}
             whileHover={{ scale: isPending ? 1 : 1.15 }}
             whileTap={{ scale: isPending ? 1 : 0.9 }}
@@ -72,14 +77,15 @@ const IntlToggle = () => {
             >
               {locale.flag}
             </motion.div>
-          </motion.button>
+          </MotionButton>
         ))}
       </div>
 
       {/* Mobile: single toggle cycling to next locale */}
-      <button
-        type="button"
-        className={`${surface} flex items-center gap-2 hover:scale-110 lg:hidden`}
+      <Button
+        variant="ghost"
+        size="icon"
+        className={`${surface} h-auto w-auto rounded-full p-1 hover:bg-secondary active:scale-100 lg:hidden`}
         onClick={() =>
           handleLocaleChange(locales[(currentIndex + 1) % locales.length].value)
         }
@@ -93,7 +99,7 @@ const IntlToggle = () => {
         >
           {locales[(currentIndex + 1) % locales.length].flag}
         </motion.div>
-      </button>
+      </Button>
     </div>
   );
 };

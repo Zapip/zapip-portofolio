@@ -84,6 +84,7 @@
     "credentialIdLabel": "Credential ID",
     "verifyCredential": "Verify Credential",
     "copyLink": "Share link",
-    "copied": "Copied!"
+    "copied": "Copied!",
+    "shared": "Shared!"
   }
 }
