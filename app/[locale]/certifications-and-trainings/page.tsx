@@ -1,12 +1,11 @@
 import CertificationAndTrainingPage from "@/common/modules/certifications-and-trainings";
 
 export const metadata = {
-    title: "Certifications and Trainings Page",
-    description: "A simple Next.js 13 project with TypeScript, TailwindCSS and i18n support.",
+  title: "Certifications & Trainings",
+  description:
+    "A collection of certifications and trainings covering web development, cloud, data, and design.",
 };
 
 export default function page() {
-    return (
-        <CertificationAndTrainingPage />
-    );
+  return <CertificationAndTrainingPage />;
 }

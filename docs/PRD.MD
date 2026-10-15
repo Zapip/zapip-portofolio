@@ -175,7 +175,6 @@ Berdasarkan:
 - Title
 - Provider
 - Technology
-- Description
 
 #### Filter
 
