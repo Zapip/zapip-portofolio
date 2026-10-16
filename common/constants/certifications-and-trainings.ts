@@ -3,10 +3,6 @@ import type {
   CertificationFilterOption,
 } from "@/common/types";
 
-/**
- * Certifications & Trainings data (PRD §3.4).
- * DESIGN.md §10: marked illustrative/sample until verified entries are provided.
- */
 
 const PLACEHOLDER_IMAGE = "/images/vercel.svg";
 
@@ -204,14 +200,6 @@ export const certificationCategoryOptions: readonly string[] = uniqueSorted(
   certificationsAndTrainingsList.map((item) => item.category.en),
 );
 
-export const certificationTechnologyOptions: readonly string[] = uniqueSorted(
-  certificationsAndTrainingsList.flatMap((item) => item.technologies),
-);
-
 export const certificationYearOptions: readonly string[] = uniqueSorted(
   certificationsAndTrainingsList.map((item) => item.year),
-);
-
-export const certificationProviderOptions: readonly string[] = uniqueSorted(
-  certificationsAndTrainingsList.map((item) => item.provider.en),
 );

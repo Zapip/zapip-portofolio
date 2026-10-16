@@ -8,3 +8,5 @@ export * from "./contact";
 export * from "./about";
 export * from "./achievements";
 export * from "./certifications-and-trainings";
+export * from "./projects";
+export * from "./home";

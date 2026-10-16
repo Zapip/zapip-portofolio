@@ -226,15 +226,10 @@ Menampilkan list project.
 Berdasarkan:
 
 - Project name
-- Description
-- Technology
-- Category
 
 #### Filter
 
-- Type
-- Category
-- Technology
+- Category (pribadi, magang, freelance, lomba)
 - Year
 
 #### Sorting
@@ -264,13 +259,13 @@ Wajib memiliki:
 - Problem
 - Solution
 - Role
-- Collaborator
+- Collaborator (gunakan avatar dan nama)
 - Tech stack
 - Timeline mulai sampai selesai
 - Project gallery
 - Multiple photos
 - Optional project video
-- Repository
+- Repository (if open source)
 - Live preview
 - Challenges
 - Implementation

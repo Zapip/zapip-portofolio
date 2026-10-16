@@ -1,15 +1,5 @@
 import type { IconName } from "tech-stack-icons";
 
-/**
- * Maps human-readable technology names (as stored in data constants, e.g.
- * "Next.js") to `tech-stack-icons` icon names.
- *
- * Why a map instead of storing icon names directly in the data?
- * - Data stays presentation-agnostic and filterable by plain string.
- * - Missing icons fall back to a text `tag` gracefully (see `resolveTechIcon`).
- *
- * Only include keys whose icon names exist in `tech-stack-icons@3.x`.
- */
 export const TECH_ICON_MAP: Record<string, IconName> = {
   react: "react",
   "next.js": "nextjs",
@@ -97,11 +87,6 @@ export const TECH_ICON_MAP: Record<string, IconName> = {
   markdown: "markdown",
 };
 
-/**
- * Resolve a technology name to a valid `tech-stack-icons` icon name.
- * Returns `null` when no icon is available so the caller can render a text
- * fallback instead (graceful degradation).
- */
 export function resolveTechIcon(name: string): IconName | null {
   return TECH_ICON_MAP[name.trim().toLowerCase()] ?? null;
 }

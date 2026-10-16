@@ -5,8 +5,17 @@ import { CheckIcon, ShareNetworkIcon } from "@phosphor-icons/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
-export default function ShareButton({ url, title }: { url: string; title: string }) {
-    const t = useTranslations("achievements");
+export default function ShareButton({
+    url,
+    title,
+    namespace = "achievements",
+}: {
+    url: string;
+    title: string;
+    /** i18n namespace providing `copyLink`, `copied`, `shared`. */
+    namespace?: "achievements" | "projects";
+}) {
+    const t = useTranslations(namespace);
     const [feedback, setFeedback] = useState<"idle" | "shared" | "copied">("idle");
 
     useEffect(() => {

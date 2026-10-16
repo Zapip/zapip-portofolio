@@ -11,8 +11,6 @@ import {
 import Button from "@/common/components/elements/Button";
 import {
   certificationCategoryOptions,
-  certificationProviderOptions,
-  certificationTechnologyOptions,
   certificationTypeFilters,
   certificationYearOptions,
   certificationsAndTrainingsList,
@@ -43,35 +41,21 @@ export default function CertificationAndTrainingList() {
 
   const activeType = getFilter("type");
   const activeCategory = getFilter("category");
-  const activeTechnology = getFilter("technology");
   const activeYear = getFilter("year");
-  const activeProvider = getFilter("provider");
 
   const filtered = useMemo(() => {
     return certificationsAndTrainingsList.filter((item) => {
       if (activeType !== ALL && item.type !== activeType) return false;
       if (activeCategory !== ALL && item.category.en !== activeCategory)
         return false;
-      if (activeTechnology !== ALL && !item.technologies.includes(activeTechnology))
-        return false;
       if (activeYear !== ALL && item.year !== activeYear) return false;
-      if (activeProvider !== ALL && item.provider.en !== activeProvider)
-        return false;
 
       return matchesSearch(
         [item.title[locale], item.provider[locale], ...item.technologies],
         debouncedQuery,
       );
     });
-  }, [
-    activeType,
-    activeCategory,
-    activeTechnology,
-    activeYear,
-    activeProvider,
-    debouncedQuery,
-    locale,
-  ]);
+  }, [activeType, activeCategory, activeYear, debouncedQuery, locale]);
 
   const selectClass =
     "w-full rounded-md border border-input bg-background px-3 py-2 text-xs font-medium text-foreground transition duration-200 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background sm:text-sm";
@@ -83,7 +67,7 @@ export default function CertificationAndTrainingList() {
     options: readonly string[],
     onChange: (value: string) => void,
   ) => (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex w-full flex-col gap-1.5 sm:w-auto sm:min-w-36">
       <label
         htmlFor={id}
         className="text-xs font-medium text-muted-foreground"
@@ -108,10 +92,10 @@ export default function CertificationAndTrainingList() {
 
   return (
     <section className="flex w-full flex-col gap-6">
-      {/* Controls */}
-      <div className="flex flex-col gap-4">
+      {/* Controls — stacked on mobile, single row on >=sm */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end">
         {/* Search */}
-        <div className="relative w-full">
+        <div className="relative w-full sm:min-w-48 sm:flex-1">
           <label htmlFor="certification-search" className="sr-only">
             {t("searchPlaceholder")}
           </label>
@@ -141,58 +125,47 @@ export default function CertificationAndTrainingList() {
 
         {/* Type pills */}
         <div
-          className="flex flex-wrap items-center gap-2"
+          className="flex flex-col gap-1.5 sm:w-auto"
           role="group"
           aria-label={t("filterType")}
         >
-          {certificationTypeFilters.map((type) => {
-            const isSelected = activeType === type.key;
-            return (
-              <Button
-                key={type.key}
-                variant={isSelected ? "primary" : "secondary"}
-                size="sm"
-                onClick={() => setFilter("type", type.key)}
-                aria-pressed={isSelected}
-                className="h-auto rounded-md px-3 py-1.5 font-sans font-semibold"
-              >
-                {type.label[locale]}
-              </Button>
-            );
-          })}
+          <span className="text-xs font-medium text-muted-foreground">
+            {t("filterType")}
+          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            {certificationTypeFilters.map((type) => {
+              const isSelected = activeType === type.key;
+              return (
+                <Button
+                  key={type.key}
+                  variant={isSelected ? "primary" : "secondary"}
+                  size="sm"
+                  onClick={() => setFilter("type", type.key)}
+                  aria-pressed={isSelected}
+                  className="h-9 rounded-md px-3 py-1.5 font-sans font-semibold"
+                >
+                  {type.label[locale]}
+                </Button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Dropdown filters */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {renderSelect(
-            "filter-category",
-            t("filterCategory"),
-            activeCategory,
-            certificationCategoryOptions,
-            (v) => setFilter("category", v),
-          )}
-          {renderSelect(
-            "filter-technology",
-            t("filterTechnology"),
-            activeTechnology,
-            certificationTechnologyOptions,
-            (v) => setFilter("technology", v),
-          )}
-          {renderSelect(
-            "filter-year",
-            t("filterYear"),
-            activeYear,
-            certificationYearOptions,
-            (v) => setFilter("year", v),
-          )}
-          {renderSelect(
-            "filter-provider",
-            t("filterProvider"),
-            activeProvider,
-            certificationProviderOptions,
-            (v) => setFilter("provider", v),
-          )}
-        </div>
+        {/* Category + Year */}
+        {renderSelect(
+          "filter-category",
+          t("filterCategory"),
+          activeCategory,
+          certificationCategoryOptions,
+          (v) => setFilter("category", v),
+        )}
+        {renderSelect(
+          "filter-year",
+          t("filterYear"),
+          activeYear,
+          certificationYearOptions,
+          (v) => setFilter("year", v),
+        )}
       </div>
 
       {/* Results count + reset */}

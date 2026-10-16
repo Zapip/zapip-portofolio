@@ -4,16 +4,6 @@ import StackIcon from "tech-stack-icons";
 import { resolveTechIcon } from "@/common/constants/tech-icons";
 import cn from "@/common/libs/clsxm";
 
-/**
- * TechIcon — renders a technology logo from `tech-stack-icons`, resolving a
- * human-readable name (e.g. "Next.js") to a library icon name.
- *
- * Falls back to a text `tag` when no icon exists for the given name, so data
- * can include unknown technologies without breaking the UI.
- *
- * Accessibility (DESIGN.md §8): the icon is decorative; the technology name is
- * exposed via `role="img"` + `aria-label` (or visible text in fallback mode).
- */
 
 export interface TechIconProps {
   name: string;
