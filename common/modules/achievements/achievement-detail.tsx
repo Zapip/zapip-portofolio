@@ -1,20 +1,23 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
-    ArrowLeftIcon,
-    ArrowUpRightIcon,
-    BuildingsIcon,
-    CalendarBlankIcon,
-    CertificateIcon,
-    CheckIcon,
-    CopyIcon,
+  ArrowLeftIcon,
+  ArrowUpRightIcon,
+  BuildingsIcon,
+  CalendarBlankIcon,
+  CertificateIcon,
+  CheckIcon,
+  CopyIcon,
+  ImageIcon,
 } from "@phosphor-icons/react";
 import { Link } from "@/i18n/navigation";
 import Container from "@/common/components/elements/Container";
 import Separator from "@/common/components/elements/Separator";
 import Button from "@/common/components/elements/Button";
+import ImageViewer from "@/common/components/elements/ImageViewer";
 import { buttonVariants } from "@/common/components/elements/Button";
 import { useCopyToClipboard } from "@/common/hooks/useCopyToClipboard";
 import type { Achievement, Locale } from "@/common/types";
@@ -28,6 +31,7 @@ export default function AchievementDetail({ achievement }: AchievementDetailProp
     const locale = useLocale() as Locale;
     const t = useTranslations("achievements");
     const { copied: copiedId, copy } = useCopyToClipboard();
+    const [viewerIndex, setViewerIndex] = useState<number | null>(null);
 
     const title = achievement.title[locale];
     const organization = achievement.organization[locale];
@@ -38,6 +42,9 @@ export default function AchievementDetail({ achievement }: AchievementDetailProp
         approach: achievement.shortDescription,
         outcome: achievement.shortDescription,
     };
+
+    const evidenceSrc = achievement.evidenceImage ?? achievement.thumbnail;
+    const images = evidenceSrc ? [evidenceSrc] : [];
 
     return (
         <Container>
@@ -88,15 +95,23 @@ export default function AchievementDetail({ achievement }: AchievementDetailProp
                     {/* Left Column (8 cols): Evidence Image + Narrative Story */}
                     <div className="flex flex-col gap-8 lg:col-span-8">
                         {/* Evidence Image */}
-                        <div className="bento-card relative aspect-video w-full overflow-hidden border border-border bg-secondary shadow-xs">
+                        <button
+                            type="button"
+                            onClick={() => setViewerIndex(0)}
+                            className="bento-card group relative aspect-video w-full overflow-hidden border border-border bg-secondary p-0 shadow-xs focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                            aria-label={t("viewImage", { default: "View image fullscreen" })}
+                        >
                             <Image
-                                src={achievement.evidenceImage ?? achievement.thumbnail}
+                                src={evidenceSrc}
                                 alt={`${title} evidence certificate`}
                                 fill
                                 loading="eager"
-                                className="object-contain p-8 md:p-12"
+                                className="object-contain p-8 transition-transform duration-300 group-hover:scale-105 md:p-12"
                             />
-                        </div>
+                            <span className="absolute right-3 bottom-3 inline-flex size-8 items-center justify-center rounded-md bg-background/90 text-muted-foreground opacity-0 backdrop-blur-xs transition duration-200 group-hover:opacity-100">
+                                <ImageIcon size={16} weight="bold" />
+                            </span>
+                        </button>
 
                         {/* Structured 3-Act Story */}
                         <div className="flex flex-col gap-8">
@@ -238,6 +253,24 @@ export default function AchievementDetail({ achievement }: AchievementDetailProp
                     </aside>
                 </div>
             </div>
+
+            {/* Fullscreen image viewer */}
+            {images.length > 0 && (
+                <ImageViewer
+                    images={images}
+                    index={viewerIndex}
+                    altBase={title}
+                    labels={{
+                        close: t("viewerClose", { default: "Close" }),
+                        prev: t("viewerPrev", { default: "Previous" }),
+                        next: t("viewerNext", { default: "Next" }),
+                        counter: (current, total) =>
+                            t("viewerCounter", { current, total, default: `${current} / ${total}` }),
+                    }}
+                    onClose={() => setViewerIndex(null)}
+                    onNavigate={setViewerIndex}
+                />
+            )}
         </Container>
     );
 }

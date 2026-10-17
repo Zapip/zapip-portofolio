@@ -35,7 +35,7 @@ export interface UseListFiltersResult {
 export function useListFilters(
   options: UseListFiltersOptions = {},
 ): UseListFiltersResult {
-  const { debounceMs = 250 } = options;
+  const { debounceMs = 500 } = options;
 
   const [searchQuery, setSearchQueryState] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");

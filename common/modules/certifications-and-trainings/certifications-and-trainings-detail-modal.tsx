@@ -1,18 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   ArrowUpRightIcon,
-  CalendarBlankIcon,
   BuildingsIcon,
+  CalendarBlankIcon,
   CertificateIcon,
   CheckIcon,
   ClockIcon,
   CopyIcon,
+  ImageIcon,
 } from "@phosphor-icons/react";
 import Modal from "@/common/components/elements/Modal";
 import Button from "@/common/components/elements/Button";
+import ImageViewer from "@/common/components/elements/ImageViewer";
 import { buttonVariants } from "@/common/components/elements/Button";
 import TechIcon from "@/common/components/elements/TechIcon";
 import { useCopyToClipboard } from "@/common/hooks/useCopyToClipboard";
@@ -41,6 +44,7 @@ export default function CertificationDetailModal({
   const locale = useLocale() as Locale;
   const t = useTranslations("certifications");
   const { copied, copy } = useCopyToClipboard();
+  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
 
   if (!item) return null;
 
@@ -53,6 +57,8 @@ export default function CertificationDetailModal({
   const typeLabel = isCertification
     ? t("typeCertification")
     : t("typeTraining");
+  const evidenceSrc = item.certificateImage ?? "/images/vercel.svg";
+  const images = [evidenceSrc];
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={title} closeLabel={t("closeModal")}>
@@ -70,15 +76,23 @@ export default function CertificationDetailModal({
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
           {/* Evidence image */}
           <div className="lg:col-span-5">
-            <div className="bento-card relative aspect-video w-full overflow-hidden border border-border bg-secondary">
+            <button
+              type="button"
+              onClick={() => setViewerIndex(0)}
+              className="bento-card group relative aspect-video w-full overflow-hidden border border-border bg-secondary p-0 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              aria-label={t("viewImage", { default: "View image fullscreen" })}
+            >
               <Image
-                src={item.certificateImage ?? "/images/vercel.svg"}
+                src={evidenceSrc}
                 alt={`${title} ${isCertification ? t("certificateLabel") : t("evidenceLabel")}`}
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-contain p-6"
+                className="object-contain p-6 transition-transform duration-300 group-hover:scale-105"
               />
-            </div>
+              <span className="absolute right-3 bottom-3 inline-flex size-8 items-center justify-center rounded-md bg-background/90 text-muted-foreground opacity-0 backdrop-blur-xs transition duration-200 group-hover:opacity-100">
+                <ImageIcon size={16} weight="bold" />
+              </span>
+            </button>
           </div>
 
           {/* Details */}
@@ -204,6 +218,20 @@ export default function CertificationDetailModal({
           </div>
         )}
       </div>
+      <ImageViewer
+        images={images}
+        index={viewerIndex}
+        altBase={title}
+        labels={{
+          close: t("viewerClose", { default: "Close" }),
+          prev: t("viewerPrev", { default: "Previous" }),
+          next: t("viewerNext", { default: "Next" }),
+          counter: (current, total) =>
+            t("viewerCounter", { current, total, default: `${current} / ${total}` }),
+        }}
+        onClose={() => setViewerIndex(null)}
+        onNavigate={setViewerIndex}
+      />
     </Modal>
   );
 }

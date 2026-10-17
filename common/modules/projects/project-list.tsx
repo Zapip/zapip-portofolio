@@ -18,6 +18,7 @@ import {
 import { matchesSearch, useListFilters } from "@/common/hooks/use-list-filters";
 import type { Locale } from "@/common/types";
 import ProjectCard from "./project-card";
+import { Select } from "@/common/components/elements/Select";
 
 const ALL = "all";
 
@@ -68,9 +69,6 @@ export default function ProjectList() {
         );
     }
   }, [activeCategory, activeYear, activeSort, debouncedQuery, locale]);
-
-  const selectClass =
-    "w-full rounded-md border border-input bg-background px-3 py-2 text-xs font-medium text-foreground transition duration-200 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background sm:text-sm";
 
   return (
     <section className="flex w-full flex-col gap-6">
@@ -133,50 +131,27 @@ export default function ProjectList() {
           </div>
         </div>
 
-        {/* Year */}
-        <div className="flex w-full flex-col gap-1.5 sm:w-auto sm:min-w-36">
-          <label
-            htmlFor="filter-year"
-            className="text-xs font-medium text-muted-foreground"
-          >
-            {t("filterYear")}
-          </label>
-          <select
-            id="filter-year"
-            value={activeYear}
-            onChange={(e) => setFilter("year", e.target.value)}
-            className={selectClass}
-          >
-            <option value={ALL}>{t("allOption")}</option>
-            {projectYearOptions.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Select
+          id="filter-year"
+          label={t("filterYear")}
+          value={activeYear}
+          options={projectYearOptions}
+          onChange={(value) => setFilter("year", value)}
+          allOptionLabel={t("allOption")}
+          allValue={ALL}
+        />
 
         {/* Sort */}
-        <div className="flex w-full flex-col gap-1.5 sm:w-auto sm:min-w-36">
-          <label
-            htmlFor="filter-sort"
-            className="text-xs font-medium text-muted-foreground"
-          >
-            {t("sortLabel")}
-          </label>
-          <select
-            id="filter-sort"
-            value={activeSort === ALL ? "featured" : activeSort}
-            onChange={(e) => setFilter("sort", e.target.value)}
-            className={selectClass}
-          >
-            {projectSortOptions.map((option) => (
-              <option key={option.key} value={option.key}>
-                {option.label[locale]}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Select
+          id="filter-sort"
+          label={t("sortLabel")}
+          value={activeSort === ALL ? "featured" : activeSort}
+          options={projectSortOptions.map((option) => ({
+            value: option.key,
+            label: option.label[locale],
+          }))}
+          onChange={(value) => setFilter("sort", value)}
+        />
       </div>
 
       {/* Results count + reset */}

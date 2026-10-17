@@ -11,6 +11,8 @@ export interface TechIconProps {
   showLabel?: boolean;
   /** Icon size in pixels (defaults to 16). */
   size?: number;
+  /** Icon variant. If omitted, follows the active theme (dark → "dark"). */
+  variant?: "dark" | "light" | "grayscale";
   className?: string;
 }
 
@@ -18,6 +20,7 @@ export default function TechIcon({
   name,
   showLabel = false,
   size = 16,
+  variant,
   className,
 }: TechIconProps) {
   const iconName = resolveTechIcon(name);
@@ -31,12 +34,34 @@ export default function TechIcon({
     );
   }
 
-  const icon = (
+  // Render both variants and let `.dark` CSS decide — the SSR output is
+  // identical to the client's first render (no hydration mismatch) and the
+  // correct variant shows immediately because next-themes sets `.dark`
+  // before paint.
+  const sized = (node: React.ReactNode, extra: string) => (
+    <span
+      className={cn("inline-flex shrink-0", extra)}
+      style={{ width: size, height: size }}
+    >
+      {node}
+    </span>
+  );
+
+  const light = sized(
     <StackIcon
       name={iconName}
-      className="shrink-0"
-      style={{ width: size, height: size }}
-    />
+      variant={variant ?? "light"}
+      className="h-full w-full"
+    />,
+    "dark:hidden",
+  );
+  const dark = sized(
+    <StackIcon
+      name={iconName}
+      variant={variant ?? "dark"}
+      className="h-full w-full"
+    />,
+    "hidden dark:inline-flex",
   );
 
   return (
@@ -49,7 +74,8 @@ export default function TechIcon({
       role="img"
       aria-label={name}
     >
-      {icon}
+      {light}
+      {dark}
       {showLabel && <span aria-hidden>{name}</span>}
     </span>
   );

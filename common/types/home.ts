@@ -17,6 +17,7 @@ export interface HomeFocus {
 
 /** Skill group for the "Core Skills" bento card. */
 export interface HomeSkillGroups {
+  main?: string[];
   frontend: string[];
   backend: string[];
   database: string[];

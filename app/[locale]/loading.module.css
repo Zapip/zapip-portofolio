@@ -1,0 +1,299 @@
+/* ========================================
+   SPEEDER LOADING ANIMATION
+   ======================================== */
+
+.loader {
+    zoom: 1.5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    animation: speeder 0.4s linear infinite;
+}
+
+.loader>span {
+    position: absolute;
+    top: -19px;
+    left: 60px;
+    width: 35px;
+    height: 5px;
+    background: currentColor;
+    border-radius: 2px 10px 1px 0;
+}
+
+.loader .base span {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-right: 100px solid currentColor;
+    border-bottom: 6px solid transparent;
+}
+
+.loader .base span::before {
+    content: "";
+    position: absolute;
+    top: -16px;
+    right: -110px;
+    width: 22px;
+    height: 22px;
+    background: currentColor;
+    border-radius: 50%;
+}
+
+.loader .base span::after {
+    content: "";
+    position: absolute;
+    top: -16px;
+    right: -98px;
+    width: 0;
+    height: 0;
+    border-top: 0 solid transparent;
+    border-right: 55px solid currentColor;
+    border-bottom: 16px solid transparent;
+}
+
+.loader .face {
+    position: absolute;
+    top: -15px;
+    right: -125px;
+    width: 20px;
+    height: 12px;
+    background: currentColor;
+    border-radius: 20px 20px 0 0;
+    transform: rotate(-40deg);
+}
+
+.loader .face::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    right: 4px;
+    width: 12px;
+    height: 12px;
+    background: currentColor;
+    border-radius: 0 0 0 2px;
+    transform: rotate(40deg);
+    transform-origin: 50% 50%;
+}
+
+/* Short speed lines */
+
+.loader>span>span:nth-child(1),
+.loader>span>span:nth-child(2),
+.loader>span>span:nth-child(3),
+.loader>span>span:nth-child(4) {
+    position: absolute;
+    width: 30px;
+    height: 1px;
+    background: currentColor;
+    animation: fazer1 0.2s linear infinite;
+}
+
+.loader>span>span:nth-child(2) {
+    top: 3px;
+    animation-name: fazer2;
+    animation-duration: 0.4s;
+}
+
+.loader>span>span:nth-child(3) {
+    top: 1px;
+    animation-name: fazer3;
+    animation-duration: 0.4s;
+    animation-delay: -1s;
+}
+
+.loader>span>span:nth-child(4) {
+    top: 4px;
+    animation-name: fazer4;
+    animation-duration: 1s;
+    animation-delay: -1s;
+}
+
+@keyframes fazer1 {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: -80px;
+        opacity: 0;
+    }
+}
+
+@keyframes fazer2 {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: -100px;
+        opacity: 0;
+    }
+}
+
+@keyframes fazer3 {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: -50px;
+        opacity: 0;
+    }
+}
+
+@keyframes fazer4 {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: -150px;
+        opacity: 0;
+    }
+}
+
+/* Vehicle movement */
+
+@keyframes speeder {
+    0% {
+        transform: translate(2px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -3px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-2px, 0) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 3px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-1px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-2px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(2px, 1px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+/* Long speed lines */
+
+.longfazers {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.longfazers span {
+    position: absolute;
+    width: 20%;
+    height: 2px;
+    background: currentColor;
+}
+
+.longfazers span:nth-child(1) {
+    top: 20%;
+    animation: lf 0.6s linear infinite;
+    animation-delay: -5s;
+}
+
+.longfazers span:nth-child(2) {
+    top: 40%;
+    animation: lf2 0.8s linear infinite;
+    animation-delay: -1s;
+}
+
+.longfazers span:nth-child(3) {
+    top: 60%;
+    animation: lf3 0.6s linear infinite;
+}
+
+.longfazers span:nth-child(4) {
+    top: 80%;
+    animation: lf4 0.5s linear infinite;
+    animation-delay: -3s;
+}
+
+@keyframes lf {
+    0% {
+        left: 200%;
+    }
+
+    100% {
+        left: -200%;
+        opacity: 0;
+    }
+}
+
+@keyframes lf2 {
+    0% {
+        left: 200%;
+    }
+
+    100% {
+        left: -200%;
+        opacity: 0;
+    }
+}
+
+@keyframes lf3 {
+    0% {
+        left: 200%;
+    }
+
+    100% {
+        left: -100%;
+        opacity: 0;
+    }
+}
+
+@keyframes lf4 {
+    0% {
+        left: 200%;
+    }
+
+    100% {
+        left: -100%;
+        opacity: 0;
+    }
+}
+
+/* Respect system reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .loader,
+    .loader>span>span,
+    .longfazers span {
+        animation: none !important;
+    }
+}

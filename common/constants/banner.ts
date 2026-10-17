@@ -14,8 +14,8 @@ export const about: Banner = {
         id: "Orang di balik piksel",
     },
     description: {
-        en: "Full Stack Developer · Indonesia",
-        id: "Pengembang Full Stack · Indonesia",
+        en: "Full Stack Developer · Lamongan, Indonesia",
+        id: "Full Stack Developer · Lamongan, Indonesia",
     },
 };
 

@@ -1,6 +1,12 @@
 @import "tailwindcss";
 
 /* ============================================================
+   Class-based dark variant — required for Tailwind v4 because
+   theming is toggled with a `.dark` class on <html> (next-themes),
+   not the OS `prefers-color-scheme`.
+   ============================================================ */
+
+/* ============================================================
    DESIGN.md §2 — Color tokens (semantic)
    Defined in :root (light, default) and .dark (dark theme).
    `@theme inline` below wires them to Tailwind v4 utilities
@@ -275,6 +281,7 @@ html {
     opacity: 0;
     transform: translateY(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

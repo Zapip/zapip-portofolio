@@ -9,7 +9,7 @@
   },
   "loading": {
     "title": "Loading",
-    "subtitle": "Please wait a moment"
+    "subtitle": "Please wait a moment ❤️"
   },
   "notFound": {
     "eyebrow": "Error 404",
@@ -33,6 +33,7 @@
     "moreAboutMe": "More about me",
     "featured": "Featured",
     "skillsLabel": "02 / Core Skills",
+    "skillsMain": "Main",
     "skillsFrontend": "Frontend",
     "skillsBackend": "Backend",
     "skillsDatabase": "Database",
@@ -92,6 +93,7 @@
     "clearFilters": "Reset search & filter",
     "viewDetail": "View detail",
     "backToList": "Back to achievements",
+    "evidencePreviewHint": "Click the image to view it fullscreen",
     "evidencePreview": "Credential Evidence Preview",
     "contextTitle": "01 / Context",
     "contextSubtitle": "Why it came about",
@@ -107,7 +109,12 @@
     "verifyCredential": "Verify Credential",
     "copyLink": "Share link",
     "copied": "Copied!",
-    "shared": "Shared!"
+    "shared": "Shared!",
+    "viewImage": "View image fullscreen",
+    "viewerClose": "Close gallery",
+    "viewerPrev": "Previous image",
+    "viewerNext": "Next image",
+    "viewerCounter": "{current} / {total}"
   },
   "certifications": {
     "searchPlaceholder": "Search by title, provider, or technology...",
@@ -138,7 +145,12 @@
     "evidenceLabel": "Evidence",
     "verifyCredential": "Verify Credential",
     "copied": "Copied!",
-    "closeModal": "Close dialog"
+    "closeModal": "Close dialog",
+    "viewImage": "View image fullscreen",
+    "viewerClose": "Close gallery",
+    "viewerPrev": "Previous image",
+    "viewerNext": "Next image",
+    "viewerCounter": "{current} / {total}"
   },
   "projects": {
     "searchPlaceholder": "Search projects by name...",

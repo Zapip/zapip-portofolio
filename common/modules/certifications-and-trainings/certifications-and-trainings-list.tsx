@@ -19,6 +19,7 @@ import { matchesSearch, useListFilters } from "@/common/hooks/use-list-filters";
 import type { CertificationAndTraining, Locale } from "@/common/types";
 import CertificationCard from "./certifications-and-trainings-card";
 import CertificationDetailModal from "./certifications-and-trainings-detail-modal";
+import { Select } from "@/common/components/elements/Select";
 
 const ALL = "all";
 
@@ -57,45 +58,12 @@ export default function CertificationAndTrainingList() {
     });
   }, [activeType, activeCategory, activeYear, debouncedQuery, locale]);
 
-  const selectClass =
-    "w-full rounded-md border border-input bg-background px-3 py-2 text-xs font-medium text-foreground transition duration-200 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background sm:text-sm";
-
-  const renderSelect = (
-    id: string,
-    label: string,
-    value: string,
-    options: readonly string[],
-    onChange: (value: string) => void,
-  ) => (
-    <div className="flex w-full flex-col gap-1.5 sm:w-auto sm:min-w-36">
-      <label
-        htmlFor={id}
-        className="text-xs font-medium text-muted-foreground"
-      >
-        {label}
-      </label>
-      <select
-        id={id}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className={selectClass}
-      >
-        <option value={ALL}>{t("allOption")}</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-
   return (
     <section className="flex w-full flex-col gap-6">
       {/* Controls — stacked on mobile, single row on >=sm */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
         {/* Search */}
-        <div className="relative w-full sm:min-w-48 sm:flex-1">
+        <div className="relative w-full flex-1">
           <label htmlFor="certification-search" className="sr-only">
             {t("searchPlaceholder")}
           </label>
@@ -151,21 +119,29 @@ export default function CertificationAndTrainingList() {
           </div>
         </div>
 
-        {/* Category + Year */}
-        {renderSelect(
-          "filter-category",
-          t("filterCategory"),
-          activeCategory,
-          certificationCategoryOptions,
-          (v) => setFilter("category", v),
-        )}
-        {renderSelect(
-          "filter-year",
-          t("filterYear"),
-          activeYear,
-          certificationYearOptions,
-          (v) => setFilter("year", v),
-        )}
+        <section className="flex flex-row gap-4">
+          {/* Category + Year */}
+          <Select
+            id="filter-category"
+            label={t("filterCategory")}
+            value={activeCategory}
+            options={certificationCategoryOptions}
+            onChange={(value) => setFilter("category", value)}
+            allOptionLabel={t("allOption")}
+            allValue={ALL}
+          />
+
+          <Select
+            id="filter-year"
+            label={t("filterYear")}
+            value={activeYear}
+            options={certificationYearOptions}
+            onChange={(value) => setFilter("year", value)}
+            allOptionLabel={t("allOption")}
+            allValue={ALL}
+          />
+        </section>
+
       </div>
 
       {/* Results count + reset */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useId, useRef } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
 import {
@@ -10,20 +10,14 @@ import {
 } from "@phosphor-icons/react";
 import Button from "@/common/components/elements/Button";
 import { useIsClient } from "@/common/hooks/use-is-client";
+import {
+  isTopDialog,
+  lockScroll,
+  popDialog,
+  pushDialog,
+  unlockScroll,
+} from "@/common/libs/scroll-lock";
 import Image from "next/image";
-
-/**
- * ImageViewer — fullscreen gallery overlay with prev/next navigation.
- *
- * Accessibility (PRD §6 / DESIGN.md §8, WCAG 2.2 AA):
- * - `role="dialog"` + `aria-modal`, labelled by the counter
- * - Escape closes; backdrop click closes
- * - ArrowLeft / ArrowRight navigate
- * - Body scroll lock + focus trap + focus restore to the triggering thumbnail
- *
- * Motion is subtle and collapses under `prefers-reduced-motion` via the global
- * rule in app/globals.css. Rendered in a portal at `z-[100]` (above navbar).
- */
 
 export interface ImageViewerLabels {
   close: string;
@@ -57,6 +51,7 @@ export default function ImageViewer({
   const isClient = useIsClient();
   const dialogRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
+  const dialogId = useId();
 
   const total = images.length;
   const isOpen = index !== null && total > 0;
@@ -68,15 +63,17 @@ export default function ImageViewer({
     }
   }, [isOpen]);
 
-  // Lock body scroll.
+  // Lock body scroll (counter-based so it composes with a parent Modal) and
+  // register on the dialog stack so the viewer wins Escape over the Modal.
   useEffect(() => {
     if (!isOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    lockScroll();
+    pushDialog(dialogId);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      unlockScroll();
+      popDialog(dialogId);
     };
-  }, [isOpen]);
+  }, [isOpen, dialogId]);
 
   const goTo = useCallback(
     (next: number) => {
@@ -93,6 +90,8 @@ export default function ImageViewer({
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        if (!isTopDialog(dialogId)) return;
+        event.stopImmediatePropagation();
         event.stopPropagation();
         onClose();
         return;
@@ -133,7 +132,7 @@ export default function ImageViewer({
 
     document.addEventListener("keydown", onKeyDown, true);
     return () => document.removeEventListener("keydown", onKeyDown, true);
-  }, [isOpen, onClose, goTo, index]);
+  }, [isOpen, onClose, goTo, index, dialogId]);
 
   // Move focus into the dialog when opened.
   useEffect(() => {
@@ -153,7 +152,7 @@ export default function ImageViewer({
     <AnimatePresence onExitComplete={restoreFocus}>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center"
+          className="fixed inset-0 z-[110] flex items-center justify-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

@@ -8,8 +8,8 @@
     "contact": "Kontak"
   },
   "loading": {
-    "title": "Memuat",
-    "subtitle": "Mohon tunggu sebentar"
+    "title": "Sedang Memuat",
+    "subtitle": "Harap bersabar ❤️"
   },
   "notFound": {
     "eyebrow": "Error 404",
@@ -33,6 +33,7 @@
     "moreAboutMe": "Selengkapnya tentang saya",
     "featured": "Unggulan",
     "skillsLabel": "02 / Keahlian Inti",
+    "skillsMain": "Utama",
     "skillsFrontend": "Frontend",
     "skillsBackend": "Backend",
     "skillsDatabase": "Basis Data",
@@ -107,7 +108,12 @@
     "verifyCredential": "Verifikasi Kredensial",
     "copyLink": "Bagikan tautan",
     "copied": "Tersalin!",
-    "shared": "Berhasil dibagikan!"
+    "shared": "Berhasil dibagikan!",
+    "viewImage": "Lihat gambar fullscreen",
+    "viewerClose": "Tutup galeri",
+    "viewerPrev": "Gambar sebelumnya",
+    "viewerNext": "Gambar berikutnya",
+    "viewerCounter": "{current} / {total}"
   },
   "certifications": {
     "searchPlaceholder": "Cari berdasarkan judul, penyedia, atau teknologi...",
@@ -138,7 +144,12 @@
     "evidenceLabel": "Bukti",
     "verifyCredential": "Verifikasi Kredensial",
     "copied": "Tersalin!",
-    "closeModal": "Tutup dialog"
+    "closeModal": "Tutup dialog",
+    "viewImage": "Lihat gambar fullscreen",
+    "viewerClose": "Tutup galeri",
+    "viewerPrev": "Gambar sebelumnya",
+    "viewerNext": "Gambar berikutnya",
+    "viewerCounter": "{current} / {total}"
   },
   "projects": {
     "searchPlaceholder": "Cari proyek berdasarkan nama...",

@@ -31,6 +31,7 @@ export const home: Home = {
  * Home "Core Skills" bento card (Card 3) — grouped by area (PRD §3.1 skills).
  */
 export const homeSkillGroups: HomeSkillGroups = {
+  // main: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
   frontend: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Vue.js"],
   backend: ["Node.js", "Express", "Laravel", "Java", "Python", "Go"],
   database: ["PostgreSQL", "Redis", "MySQL"],

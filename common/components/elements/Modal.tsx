@@ -3,6 +3,7 @@
 import {
   useCallback,
   useEffect,
+  useId,
   useRef,
   type MouseEvent,
   type ReactNode,
@@ -12,6 +13,13 @@ import { AnimatePresence, motion } from "motion/react";
 import { XIcon } from "@phosphor-icons/react";
 import Button from "@/common/components/elements/Button";
 import { useIsClient } from "@/common/hooks/use-is-client";
+import {
+  isTopDialog,
+  lockScroll,
+  popDialog,
+  pushDialog,
+  unlockScroll,
+} from "@/common/libs/scroll-lock";
 
 /**
  * Modal — reusable dialog primitive.
@@ -55,6 +63,7 @@ export default function Modal({
   const isClient = useIsClient();
   const dialogRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
+  const dialogId = useId();
 
   // Remember the element that opened the modal so focus can be restored.
   useEffect(() => {
@@ -63,15 +72,17 @@ export default function Modal({
     }
   }, [isOpen]);
 
-  // Lock body scroll while open.
+  // Lock body scroll while open (counter-based so a nested overlay composes)
+  // and register on the dialog stack so only the topmost dialog takes Escape.
   useEffect(() => {
     if (!isOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    lockScroll();
+    pushDialog(dialogId);
     return () => {
-      document.body.style.overflow = previousOverflow;
+      unlockScroll();
+      popDialog(dialogId);
     };
-  }, [isOpen]);
+  }, [isOpen, dialogId]);
 
   // Escape to close + focus trap for Tab / Shift+Tab.
   useEffect(() => {
@@ -79,6 +90,8 @@ export default function Modal({
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        // Only the topmost dialog reacts (a nested ImageViewer wins).
+        if (!isTopDialog(dialogId)) return;
         event.stopPropagation();
         onClose();
         return;
@@ -113,7 +126,7 @@ export default function Modal({
 
     document.addEventListener("keydown", onKeyDown, true);
     return () => document.removeEventListener("keydown", onKeyDown, true);
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, dialogId]);
 
   // Move initial focus into the dialog once mounted/open.
   useEffect(() => {
